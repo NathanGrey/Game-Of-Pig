@@ -41,20 +41,10 @@ void SinglePlayerMode()
 		cout << "\tPlayer2 will roll first!";
 	}
 }
+
 int RollSixSidedDie()
 {
-	int DiceRoll = 1; /* counter */
-	/* loop 20 times */
-	while (DiceRoll >= 2) {
-		/* pick random number from 1 to 6 and output it */
-		printf (rand() % 6);
-		/* if counter is divisible by 5, begin new line of output */
-		if (DiceRoll < 2) 
-		{
-			break;
-		} /* end if */
-	} /* end for */
-	return 0; /* indicates successful termination */
+	return rand() % 6 + 1;
 }
 
 
@@ -125,6 +115,8 @@ int main()
 	//int diceRoll = rand() % 20 + 1;
 
     int GameModeChoice;
+    srand(time(NULL));
+	int diceRoll = rand() % 6 + 1;
     cout << "\n\tChoose a Game Mode:";
     cin >> GameModeChoice;
     switch (GameModeChoice)
