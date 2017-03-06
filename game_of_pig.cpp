@@ -41,13 +41,28 @@ void SinglePlayerMode()
 		cout << "\tPlayer2 will roll first!";
 	}
 }
+int RollSixSidedDie()
+{
+	int DiceRoll; /* counter */
+	/* loop 20 times */
+	for (DiceRoll = 1; DiceRoll <= 20; DiceRoll++) {
+		/* pick random number from 1 to 6 and output it */
+		printf("%d ", 1 + (rand() % 6));
+		/* if counter is divisible by 5, begin new line of output */
+		if (DiceRoll % 1 == 0) {
+			printf("\n");
+		} /* end if */
+	} /* end for */
+	return 0; /* indicates successful termination */
+}
+
 
 void VSMode()
 {
-	int Player1, Player2, Enter;
+	int Player1, Player2;
 	srand(time(NULL));
-	Player1 = rand() % 2 + 1;
-	Player2 = rand() % 2 + 1;
+	Player1 = rand() % 100 + 1;
+	Player2 = rand() % 100 + 1;
 	
 	cout << "\n**********************************************************************\n"
 		"\tHow To Play \n"
@@ -58,17 +73,32 @@ void VSMode()
 		"\t-The player can keep rolling as long as it is still their turn.\n"
 		"\tBank:\n"
 		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n";
-	cout << "\tDetermining the player order...\n";
-	cin >> Enter;
-	cin.ignore();
+	cout << "\tPress Enter to determine the Player order.\n";
+	cin.get();
+    cin.ignore();
+
 	if (Player1 > Player2)
 	{
-		cout << "\tPlayer1 will roll first!";
+		cout << "\tPlayer1 will roll first!\n";
+		cout << "\tPress Enter to roll.\n";
+		cin.get();
+    	cin.ignore();
+    	RollSixSidedDie();
 	}
 	else if (Player2 > Player1)
-	{
-		cout << "\tPlayer2 will roll first!";
-	}
+		{
+			cout << "\tPlayer2 will roll first!\n";
+			cout << "\tPress Enter to roll.\n";
+			cin.get();
+    		cin.ignore();
+    		RollSixSidedDie();
+		}
+	else if (Player1 == Player2)
+		{
+			cout << "\tIt's a tie! Let's roll again.";
+			VSMode();
+		}
+
 }
 
 void showExitMenu()
@@ -79,19 +109,14 @@ void showExitMenu()
 
 }
 
-/*int RollSixSidedDie
-{
-	int RollNumber = rand() % 6 + 1;
-	cout << "Roll";
-	cout << "rolled a" << RollNumber;
-}*/
+
 
 int main()
 {
     showMainMenu();
 
-  	srand(time(NULL));
-	int diceRoll = rand() % 20 + 1;
+  	//srand(time(NULL));
+	//int diceRoll = rand() % 20 + 1;
 
     int GameModeChoice;
     cout << "\n\tChoose a Game Mode:";
