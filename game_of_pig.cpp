@@ -43,14 +43,15 @@ void SinglePlayerMode()
 }
 int RollSixSidedDie()
 {
-	int DiceRoll; /* counter */
+	int DiceRoll = 1; /* counter */
 	/* loop 20 times */
-	for (DiceRoll = 1; DiceRoll <= 20; DiceRoll++) {
+	while (DiceRoll >= 2) {
 		/* pick random number from 1 to 6 and output it */
-		printf("%d ", 1 + (rand() % 6));
+		printf (rand() % 6);
 		/* if counter is divisible by 5, begin new line of output */
-		if (DiceRoll % 1 == 0) {
-			printf("\n");
+		if (DiceRoll < 2) 
+		{
+			break;
 		} /* end if */
 	} /* end for */
 	return 0; /* indicates successful termination */
@@ -72,7 +73,7 @@ void VSMode()
 		"\t-If the player rolls two through six, the number is added to the player's turn total and the player's turn continues.\n"
 		"\t-The player can keep rolling as long as it is still their turn.\n"
 		"\tBank:\n"
-		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n";
+		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n\n";
 	cout << "\tPress Enter to determine the Player order.\n";
 	cin.get();
     cin.ignore();
@@ -83,7 +84,12 @@ void VSMode()
 		cout << "\tPress Enter to roll.\n";
 		cin.get();
     	cin.ignore();
-    	RollSixSidedDie();
+    	cout << "\tPlayer 1 rolled a " << RollSixSidedDie();
+    	cout << "\n\tPlayer2's turn.\n";
+    	cout << "\tPress Enter to roll.\n";
+    	cin.get();
+    	cin.ignore();
+    	cout << "\tPlayer 2 rolled a " << RollSixSidedDie();
 	}
 	else if (Player2 > Player1)
 		{
@@ -91,11 +97,11 @@ void VSMode()
 			cout << "\tPress Enter to roll.\n";
 			cin.get();
     		cin.ignore();
-    		RollSixSidedDie();
+    		cout << "\tPlayer 2 rolled a " << RollSixSidedDie();
 		}
 	else if (Player1 == Player2)
 		{
-			cout << "\tIt's a tie! Let's roll again.";
+			cout << "\tIt's a tie! Let's roll again.\n";
 			VSMode();
 		}
 
