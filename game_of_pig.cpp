@@ -13,8 +13,13 @@ void showMainMenu()
 		"\t2. VS Mode\n"
 		"\t3. Exit\n";
 }
+
 void SinglePlayerMode()
 {
+	int Player1, Player2;
+	srand(time(NULL));
+	Player1 = rand() % 2 + 1;
+	Player2 = rand() % 2 + 1;
 
 	cout << "\n**********************************************************************\n"
 		"\tHow To Play \n"
@@ -25,10 +30,25 @@ void SinglePlayerMode()
 		"\t-The player can keep rolling as long as it is still their turn.\n"
 		"\tBank:\n"
 		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n";
+	cout << "\tPress Enter to determine the player order.\n";
+
+	if (Player1 > Player2)
+	{
+		cout << "\tPlayer1 will roll first!";
+	}
+	else if (Player2 > Player1)
+	{
+		cout << "\tPlayer2 will roll first!";
+	}
 }
 
 void VSMode()
 {
+	int Player1, Player2, Enter;
+	srand(time(NULL));
+	Player1 = rand() % 2 + 1;
+	Player2 = rand() % 2 + 1;
+	
 	cout << "\n**********************************************************************\n"
 		"\tHow To Play \n"
 		"********************************************************************** \n"
@@ -38,6 +58,18 @@ void VSMode()
 		"\t-The player can keep rolling as long as it is still their turn.\n"
 		"\tBank:\n"
 		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n";
+	cout << "\tDetermining the player order...\n";
+	cin >> Enter;
+	cin.ignore();
+	if (Player1 > Player2)
+	{
+		cout << "\tPlayer1 will roll first!";
+	}
+	else if (Player2 > Player1)
+	{
+		cout << "\tPlayer2 will roll first!";
+	}
+}
 
 void showExitMenu()
 {
@@ -47,12 +79,12 @@ void showExitMenu()
 
 }
 
-int RollSixSidedDie
+/*int RollSixSidedDie
 {
 	int RollNumber = rand() % 6 + 1;
 	cout << "Roll";
 	cout << "rolled a" << RollNumber;
-}
+}*/
 
 int main()
 {
