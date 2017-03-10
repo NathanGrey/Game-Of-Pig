@@ -16,11 +16,13 @@ void showMainMenu()
 
 void SinglePlayerMode()
 {
-	int Player1, Player2;
-	srand(time(NULL));
-	Player1 = rand() % 2 + 1;
-	Player2 = rand() % 2 + 1;
+	int Player, PlayerChoice, Computer, Roll;
 
+	srand(time(NULL));
+
+	Player = rand() % 100 + 1;
+	Computer = rand() % 100 + 1;
+	
 	cout << "\n**********************************************************************\n"
 		"\tHow To Play \n"
 		"********************************************************************** \n"
@@ -29,17 +31,38 @@ void SinglePlayerMode()
 		"\t-If the player rolls two through six, the number is added to the player's turn total and the player's turn continues.\n"
 		"\t-The player can keep rolling as long as it is still their turn.\n"
 		"\tBank:\n"
-		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n";
-	cout << "\tPress Enter to determine the player order.\n";
+		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n\n";
+	cout << "\tPress Enter to determine the Player order.\n";
 
-	if (Player1 > Player2)
+	cin.get();
+    cin.ignore();
+
+	if (Player > Computer)
 	{
-		cout << "\tPlayer1 will roll first!";
+		cout << "\tPlayer will roll first!\n";
+		cout << "\tPress R to Roll or S to Skip your turn.\n";
+		cin >> PlayerChoice;
+		if (PlayerChoice == R)
+		{
+			RollSixSidedDie();
+		}
+		else (PlayerChoice == S)
+
 	}
-	else if (Player2 > Player1)
-	{
-		cout << "\tPlayer2 will roll first!";
-	}
+	else if (Computer > Player)
+		{
+			cout << "\tComputer will roll first!\n";
+			cout << "\tPress Enter to roll.\n";
+			cin.get();
+    		cin.ignore();
+    		cout << "\tComputer rolled a " << RollSixSidedDie();
+		}
+	else if (Player == Computer)
+		{
+			cout << "\tIt's a tie! Let's roll again.\n";
+			VSMode();
+		}
+
 }
 
 int RollSixSidedDie()
@@ -104,8 +127,6 @@ void showExitMenu()
 	system("pause");
 
 }
-
-
 
 int main()
 {
