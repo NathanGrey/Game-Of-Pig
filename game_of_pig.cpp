@@ -44,9 +44,12 @@ void SinglePlayerMode()
 		cin >> PlayerChoice;
 		if (PlayerChoice == R)
 		{
-			RollSixSidedDie();
+			PLayerTurn();
 		}
 		else (PlayerChoice == S)
+		{
+			ComputerTurn();
+		}
 
 	}
 	else if (Computer > Player)
@@ -65,9 +68,24 @@ void SinglePlayerMode()
 
 }
 
+int PLayerTurn()
+	{
+		int PlayerScore;
+
+		RollSixSidedDie();
+
+		if (PlayerScore >= 2)
+		{
+			cout << "You rolled a " << PlayerScore << ". Press R to roll again or S to Skip.";
+			cin >> 
+		}
+
+	}
+
 int RollSixSidedDie()
 {
-	return rand() % 6 + 1;
+	int Roll = rand() % 6 + 1;
+	return PlayerScore;
 }
 
 
@@ -131,9 +149,6 @@ void showExitMenu()
 int main()
 {
     showMainMenu();
-
-  	//srand(time(NULL));
-	//int diceRoll = rand() % 20 + 1;
 
     int GameModeChoice;
     srand(time(NULL));
