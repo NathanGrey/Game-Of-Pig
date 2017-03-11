@@ -12,22 +12,72 @@ int RollSixSidedDie()
 
 int PlayerTurn()
 	{
-		int PlayerScore, Roll;
+		int CurrentScore = 0;
+		int Roll, PlayerTotalScore;
+		char PlayerChoice;
 
-		RollSixSidedDie();
+		cout << "\tYour total score is " << PlayerTotalScore << ".\n";
+		cout << "\tPress R to roll again or S to skip.\n";
+		cin >> PlayerChoice;
 
-		if (PlayerScore >= 2)
+		while (PlayerChoice == 'r')
 		{
-			cout << "You rolled a " << Roll << ". Press R to roll again or S to Skip.";
-	
+
+			Roll = RollSixSidedDie();
+
+			if (Roll == 1)
+			{
+				cout << "\tYou rolled a 1. Computer's turn.\n";
+				break;
+			}
+			else
+			{
+				CurrentScore += Roll;
+				cout << "\tYou rolled a " << Roll << ". Your Score is " << CurrentScore;
+				cout << "\t\nPress R to roll again or s to skip.\n";
+				cin >> PlayerChoice;
+			}
+
 		}
-		return PlayerScore;
+		while (PlayerChoice == 's')
+		{
+			PlayerTotalScore += CurrentScore;
+			break;
+		}
+		
+		return PlayerTotalScore;
 	}
+
 int ComputerTurn()
 {
-	int ComputerScore;
-	return ComputerScore;
+	int CurrentScore = 0;
+	int ComputerTotalScore, Roll;
+
+	cout << "\tThe Computer has a total score of " << ComputerTotalScore << ".\n";
+	while ((CurrentScore <= 20) && (CurrentScore !=1))
+	{
+		Roll = RollSixSidedDie();
+		if (Roll == 1)
+		{
+			cout << "\tThe Computer rolled a 1. Player's turn.\n\n";
+			PlayerTurn();
+			break;
+		}
+		else
+		{
+			CurrentScore += Roll;
+			cout << "\tThe Computer rolled a " << Roll << ". The Computer's score is " << CurrentScore < ".\n\n";
+		}
+	if (CurrentScore >= 20)
+	{
+		ComputerTotalScore +=CurrentScore;
+		cout << "\t The Computer's Total Score is " << Roll << ".\n\n";
+	}
+
+	}
+	return ComputerTotalScore;
 }
+
 void VSMode()
 {
 	int Player1, Player2;
@@ -95,10 +145,10 @@ void showExitMenu()
 
 }
 
-void SinglePlayerMode()
+int SinglePlayerMode()
 {
-	int Player, PlayerChoice, Computer;
-	
+	int Player, Computer;
+	const int WinningScore = 100;
 	srand(time(NULL));
 
 	Player = rand() % 100 + 1;
@@ -118,39 +168,56 @@ void SinglePlayerMode()
 	cin.get();
     cin.ignore();
 
-	if (Player > Computer)
+    bool win = 1;
+    int PlayerTotalScore = 0, ComputerTotalScore = 0;
+
+    cout << "It is your turn. Press r to roll.\n";
+    if ((PlayerTotalScore < WinningScore) && (ComputerTotalScore < WinningScore))
+    {
+        win = 1;
+    }
+    else
+    {
+        win = 0;
+    }
+    do
+    {
+        cout << "Computers Score: " << ComputerTotalScore << endl;
+       
+        PlayerTurn();
+        ComputerTurn();
+    }
+    while(win = 1);
+   
+    if ((win = 0) && (PlayerTotalScore > ComputerTotalScore))
+    {
+        cout << "You win!";
+    }
+    else
+    {
+        cout << "You lost!";
+    }
+   
+   
+    return 0;
+}
+
+	/*if (Player > Computer)
 	{
 		cout << "\tPlayer will roll first!\n";
-		cout << "\tPress R to Roll or S to Skip your turn.\n";
-		cin >> PlayerChoice;
-		if (PlayerChoice == 'r')
-		{
-			PlayerTurn();
-		}
-		else if (PlayerChoice == 's')
-		{
-			ComputerTurn();
-		}
-
+		PlayerTurn();
 	}
 	else if (Computer > Player)
 		{
 			cout << "\tComputer will roll first!\n";
-			cout << "\tPress Enter to roll.\n";
-			cin.get();
-    		cin.ignore();
-    		cout << "\tComputer rolled a " << RollSixSidedDie();
+			ComputerTurn();
 		}
 	else if (Player == Computer)
 		{
 			cout << "\tIt's a tie! Let's roll again.\n";
 			VSMode();
 		}
-
-}
-
-
-
+}*/
 int main()
 {
     showMainMenu();
