@@ -3,92 +3,31 @@
 #include <time.h>
 using namespace std;     
 
-void showMainMenu()
+int RollSixSidedDie()
 {
-	cout << "\n**********************************************************************\n"
-		"\tWelcome to the Game of Pig! \n"
-		"********************************************************************** \n"
-		"\tGame Modes:\n"
-		"\t1. Single Player Bot Battles\n"
-		"\t2. VS Mode\n"
-		"\t3. Exit\n";
+
+	int Roll = rand() % 6 + 1;
+	return Roll;
 }
 
-void SinglePlayerMode()
-{
-	int Player, PlayerChoice, Computer, Roll;
-
-	srand(time(NULL));
-
-	Player = rand() % 100 + 1;
-	Computer = rand() % 100 + 1;
-	
-	cout << "\n**********************************************************************\n"
-		"\tHow To Play \n"
-		"********************************************************************** \n"
-		"\tRoll:\n"
-		"\t-If the player rolls a one, their turn ends and they earn a score of zero for the turn.\n"
-		"\t-If the player rolls two through six, the number is added to the player's turn total and the player's turn continues.\n"
-		"\t-The player can keep rolling as long as it is still their turn.\n"
-		"\tBank:\n"
-		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n\n";
-	cout << "\tPress Enter to determine the Player order.\n";
-
-	cin.get();
-    cin.ignore();
-
-	if (Player > Computer)
+int PlayerTurn()
 	{
-		cout << "\tPlayer will roll first!\n";
-		cout << "\tPress R to Roll or S to Skip your turn.\n";
-		cin >> PlayerChoice;
-		if (PlayerChoice == R)
-		{
-			PLayerTurn();
-		}
-		else (PlayerChoice == S)
-		{
-			ComputerTurn();
-		}
-
-	}
-	else if (Computer > Player)
-		{
-			cout << "\tComputer will roll first!\n";
-			cout << "\tPress Enter to roll.\n";
-			cin.get();
-    		cin.ignore();
-    		cout << "\tComputer rolled a " << RollSixSidedDie();
-		}
-	else if (Player == Computer)
-		{
-			cout << "\tIt's a tie! Let's roll again.\n";
-			VSMode();
-		}
-
-}
-
-int PLayerTurn()
-	{
-		int PlayerScore;
+		int PlayerScore, Roll;
 
 		RollSixSidedDie();
 
 		if (PlayerScore >= 2)
 		{
-			cout << "You rolled a " << PlayerScore << ". Press R to roll again or S to Skip.";
-			cin >> 
+			cout << "You rolled a " << Roll << ". Press R to roll again or S to Skip.";
+	
 		}
-
+		return PlayerScore;
 	}
-
-int RollSixSidedDie()
+int ComputerTurn()
 {
-	int Roll = rand() % 6 + 1;
-	return PlayerScore;
+	int ComputerScore;
+	return ComputerScore;
 }
-
-
 void VSMode()
 {
 	int Player1, Player2;
@@ -138,6 +77,16 @@ void VSMode()
 
 }
 
+void showMainMenu()
+{
+	cout << "\n**********************************************************************\n"
+		"\tWelcome to the Game of Pig! \n"
+		"********************************************************************** \n"
+		"\tGame Modes:\n"
+		"\t1. Single Player Bot Battles\n"
+		"\t2. VS Mode\n"
+		"\t3. Exit\n";
+}
 void showExitMenu()
 {
 
@@ -146,13 +95,68 @@ void showExitMenu()
 
 }
 
+void SinglePlayerMode()
+{
+	int Player, PlayerChoice, Computer;
+	
+	srand(time(NULL));
+
+	Player = rand() % 100 + 1;
+	Computer = rand() % 100 + 1;
+	
+	cout << "\n**********************************************************************\n"
+		"\tHow To Play \n"
+		"********************************************************************** \n"
+		"\tRoll:\n"
+		"\t-If the player rolls a one, their turn ends and they earn a score of zero for the turn.\n"
+		"\t-If the player rolls two through six, the number is added to the player's turn total and the player's turn continues.\n"
+		"\t-The player can keep rolling as long as it is still their turn.\n"
+		"\tBank:\n"
+		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n\n";
+	cout << "\tPress Enter to determine the Player order.\n";
+
+	cin.get();
+    cin.ignore();
+
+	if (Player > Computer)
+	{
+		cout << "\tPlayer will roll first!\n";
+		cout << "\tPress R to Roll or S to Skip your turn.\n";
+		cin >> PlayerChoice;
+		if (PlayerChoice == 'r')
+		{
+			PlayerTurn();
+		}
+		else if (PlayerChoice == 's')
+		{
+			ComputerTurn();
+		}
+
+	}
+	else if (Computer > Player)
+		{
+			cout << "\tComputer will roll first!\n";
+			cout << "\tPress Enter to roll.\n";
+			cin.get();
+    		cin.ignore();
+    		cout << "\tComputer rolled a " << RollSixSidedDie();
+		}
+	else if (Player == Computer)
+		{
+			cout << "\tIt's a tie! Let's roll again.\n";
+			VSMode();
+		}
+
+}
+
+
+
 int main()
 {
     showMainMenu();
 
     int GameModeChoice;
     srand(time(NULL));
-	int diceRoll = rand() % 6 + 1;
     cout << "\n\tChoose a Game Mode:";
     cin >> GameModeChoice;
     switch (GameModeChoice)
