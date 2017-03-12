@@ -2,19 +2,23 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace std;     
-
+void showExitMenu()
+{
+	cout << "\n\tExiting the game.\n\n\t";
+	system("pause");
+}
 int RollSixSidedDie()
 {
-
 	int Roll = rand() % 6 + 1;
 	return Roll;
 }
 
-int PlayerTurn()
+int PlayerTurn(int& PlayerTotalScore)
 	{
-		int CurrentScore = 0;
-		int Roll, PlayerTotalScore;
+		int CurrentScore = 0; 
+		int Roll;
 		char PlayerChoice;
+
 
 		cout << "\tYour total score is " << PlayerTotalScore << ".\n";
 		cout << "\tPress R to roll again or S to skip.\n";
@@ -23,6 +27,7 @@ int PlayerTurn()
 		while (PlayerChoice == 'r')
 		{
 
+			srand (time(NULL));
 			Roll = RollSixSidedDie();
 
 			if (Roll == 1)
@@ -33,8 +38,8 @@ int PlayerTurn()
 			else
 			{
 				CurrentScore += Roll;
-				cout << "\tYou rolled a " << Roll << ". Your Score is " << CurrentScore;
-				cout << "\t\nPress R to roll again or s to skip.\n";
+				cout << "\tYou rolled a " << Roll << ". Your Score is " << CurrentScore << ".\n";
+				cout << "\tPress R to roll again or s to skip.\n";
 				cin >> PlayerChoice;
 			}
 
@@ -48,30 +53,29 @@ int PlayerTurn()
 		return PlayerTotalScore;
 	}
 
-int ComputerTurn()
+int ComputerTurn(int& ComputerTotalScore)
 {
 	int CurrentScore = 0;
-	int ComputerTotalScore, Roll;
+	int Roll;
 
 	cout << "\tThe Computer has a total score of " << ComputerTotalScore << ".\n";
-	while ((CurrentScore <= 20) && (CurrentScore !=1))
+	while ((CurrentScore <= 25) && (CurrentScore !=1))
 	{
 		Roll = RollSixSidedDie();
 		if (Roll == 1)
 		{
 			cout << "\tThe Computer rolled a 1. Player's turn.\n\n";
-			PlayerTurn();
 			break;
 		}
 		else
-		{
+		{			
 			CurrentScore += Roll;
-			cout << "\tThe Computer rolled a " << Roll << ". The Computer's score is " << CurrentScore < ".\n\n";
+			cout << "\tThe Computer rolled a " << Roll << ". The Computer's score is " << CurrentScore << ".\n";
 		}
-	if (CurrentScore >= 20)
+	if (CurrentScore >= 25)
 	{
 		ComputerTotalScore +=CurrentScore;
-		cout << "\t The Computer's Total Score is " << Roll << ".\n\n";
+		cout << "\tThe Computer skipped. The Computer's Total Score is " << ComputerTotalScore << ".\n\n";
 	}
 
 	}
@@ -124,7 +128,6 @@ void VSMode()
 			cout << "\tIt's a tie! Let's roll again.\n";
 			VSMode();
 		}
-
 }
 
 void showMainMenu()
@@ -137,12 +140,8 @@ void showMainMenu()
 		"\t2. VS Mode\n"
 		"\t3. Exit\n";
 }
-void showExitMenu()
-{
 
-	cout << "\n\tExiting the game.\n\n\t";
-	system("pause");
-}
+
 
 int SinglePlayerMode()
 {
@@ -167,38 +166,27 @@ int SinglePlayerMode()
 	cin.get();
     cin.ignore();
 
-    bool win = 1;
+    
     int PlayerTotalScore = 0, ComputerTotalScore = 0;
 
-    cout << "It is your turn. Press r to roll.\n";
-    if ((PlayerTotalScore < WinningScore) && (ComputerTotalScore < WinningScore))
-    {
-        win = 1;
-    }
-    else
-    {
-        win = 0;
-    }
-    do
-    {
-        cout << "Computers Score: " << ComputerTotalScore << endl;
-       
-        PlayerTurn();
-        ComputerTurn();
-    }
-    while(win = 1);
-   
-    if ((win = 0) && (PlayerTotalScore > ComputerTotalScore))
-    {
-        cout << "You win!";
-    }
-    else
-    {
-        cout << "You lost!";
-    }
-   
-   
-    return 0;
+   do
+	{
+		PlayerTotalScore = PlayerTurn(PlayerTotalScore); //add the score from a new turn to the running total
+		cout << "\tYour total score so far is " << PlayerTotalScore << ".\n";
+		if(PlayerTotalScore >= 100)
+		{
+			cout << "You Win!";
+			return 0;
+		}
+		ComputerTotalScore = ComputerTurn(ComputerTotalScore); //add the score from a new turn to the running total
+		cout << "\tComputer total score so far is " << ComputerTotalScore << ".\n";
+		if(ComputerTotalScore >= 100)
+		{
+			cout << "Computer Wins!";
+			return 0;
+		}
+	}
+	while(PlayerTotalScore < 100 && ComputerTotalScore < 100);
 }
 
 	/*if (Player > Computer)
