@@ -59,7 +59,7 @@ int ComputerTurn(int& ComputerTotalScore)
 	int Roll;
 
 	cout << "\tThe Computer has a total score of " << ComputerTotalScore << ".\n";
-	while ((CurrentScore <= 25) && (CurrentScore !=1))
+	while ((CurrentScore <= 20) && (CurrentScore !=1))
 	{
 		Roll = RollSixSidedDie();
 		if (Roll == 1)
@@ -72,7 +72,7 @@ int ComputerTurn(int& ComputerTotalScore)
 			CurrentScore += Roll;
 			cout << "\tThe Computer rolled a " << Roll << ". The Computer's score is " << CurrentScore << ".\n";
 		}
-	if (CurrentScore >= 25)
+	if (CurrentScore >= 20)
 	{
 		ComputerTotalScore +=CurrentScore;
 		cout << "\tThe Computer skipped. The Computer's Total Score is " << ComputerTotalScore << ".\n\n";
