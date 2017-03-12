@@ -142,7 +142,6 @@ void showExitMenu()
 
 	cout << "\n\tExiting the game.\n\n\t";
 	system("pause");
-
 }
 
 int SinglePlayerMode()
