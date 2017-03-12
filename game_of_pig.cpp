@@ -53,14 +53,14 @@ int PlayerTurn(int& PlayerTotalScore)
 		return PlayerTotalScore;
 	}
 
-int PlayerTurn1(int& Player1TotalScore)
+int Player1Turn(int& Player1TotalScore)
 	{
 		int CurrentScore = 0; 
 		int Roll;
 		char Player1Choice;
 
 
-		cout << "\tPlayer 1's total score is " << PlayerTotalScore << ".\n";
+		cout << "\tPlayer 1's total score is " << Player1TotalScore << ".\n";
 		cout << "\tPress R to roll again or S to skip.\n";
 		cin >> Player1Choice;
 
