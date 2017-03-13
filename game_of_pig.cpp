@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace std;     
+
 void showExitMenu()
 {
 	cout << "\n\tExiting the game.\n\n\t";
@@ -18,7 +19,6 @@ int PlayerTurn(int& PlayerTotalScore)
 		int CurrentScore = 0; 
 		int Roll;
 		char PlayerChoice;
-
 
 		cout << "\tYour total score is " << PlayerTotalScore << ".\n";
 		cout << "\tPress R to roll again or S to skip.\n";
