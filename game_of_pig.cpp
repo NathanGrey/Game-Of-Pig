@@ -3,18 +3,18 @@
 #include <time.h>
 using namespace std;     
 
-void showExitMenu()
+void showExitMenu() // Displays the Exit Menu and quits the game
 {
 	cout << "\n\tExiting the game.\n\n\t";
 	system("pause");
 }
-int RollSixSidedDie()
+int RollSixSidedDie() // Function to roll the dice and return a random number
 {
 	int Roll = rand() % 6 + 1;
 	return Roll;
 }
 
-int PlayerTurn(int& PlayerTotalScore)
+int PlayerTurn(int& PlayerTotalScore) // Function for the Player's Turn
 	{
 		int CurrentScore = 0; 
 		int Roll;
@@ -49,11 +49,11 @@ int PlayerTurn(int& PlayerTotalScore)
 			PlayerTotalScore += CurrentScore;
 			break;
 		}
-		
+
 		return PlayerTotalScore;
 	}
 
-int Player1Turn(int& Player1TotalScore)
+int Player1Turn(int& Player1TotalScore) // Function for Player 1's Turn in VS Mode
 	{
 		int CurrentScore = 0; 
 		int Roll;
@@ -92,7 +92,7 @@ int Player1Turn(int& Player1TotalScore)
 		
 		return Player1TotalScore;
 	}
-int Player2Turn(int& Player2TotalScore)
+int Player2Turn(int& Player2TotalScore) // Function for Player 2's Turn in VS Mode
 	{
 		int CurrentScore = 0; 
 		int Roll;
@@ -132,7 +132,7 @@ int Player2Turn(int& Player2TotalScore)
 		return Player2TotalScore;
 	}
 
-int ComputerTurn(int& ComputerTotalScore)
+int ComputerTurn(int& ComputerTotalScore) // Function for Computer's Turn 
 {
 	int CurrentScore = 0;
 	int Roll;
@@ -161,12 +161,12 @@ int ComputerTurn(int& ComputerTotalScore)
 	return ComputerTotalScore;
 }
 
-int VSMode()
+int VSMode() // Function for the VS Mode
 {
 	int Player1, Player2;
 	srand(time(NULL));
 
-	Player1 = rand() % 100 + 1;
+	Player1 = rand() % 100 + 1; // Makes the Players Order be determined at random
 	Player2 = rand() % 100 + 1;
 	
 	cout << "\n**********************************************************************\n"
@@ -180,10 +180,10 @@ int VSMode()
 		"\t- The turn's total score is added to the player's total score. Then their turn ends.\n\n";
 	cout << "\tPress Enter to determine the Player order.\n";
 
-	cin.get();
+	cin.get(); // Adds a pause to press Enter
     cin.ignore();
 
-    if (Player1 > Player2)
+    if (Player1 > Player2) // If statement to determine the order of Players
 	{
 		cout << "\tPlayer 1 will roll first!\n";
 		 int Player1TotalScore = 0, Player2TotalScore = 0;
@@ -191,6 +191,7 @@ int VSMode()
 					{
 						Player1TotalScore = Player1Turn(Player1TotalScore); //add the score from a new turn to the running total
 						cout << "\tPlayer 1's total score so far is " << Player1TotalScore << ".\n";
+						cout << "\tPlayer 2's total score so far is " << Player2TotalScore << ".\n";
 						if(Player1TotalScore >= 100)
 						{
 							cout << "Player 1 Wins!";
@@ -199,6 +200,7 @@ int VSMode()
 
 						Player2TotalScore = Player2Turn(Player2TotalScore); //add the score from a new turn to the running total
 						cout << "\tPlayer 2's total score so far is " << Player2TotalScore << ".\n";
+						cout << "\tPlayer 1's total score so far is " << Player1TotalScore << ".\n";
 						if(Player2TotalScore >= 100)
 						{
 							cout << "Player 2 Wins!";
@@ -216,6 +218,7 @@ int VSMode()
 					{
 						Player2TotalScore = Player2Turn(Player2TotalScore); //add the score from a new turn to the running total
 						cout << "\tPlayer 2's total score so far is " << Player2TotalScore << ".\n";
+						cout << "\tPlayer 1's total score so far is " << Player1TotalScore << ".\n";
 						if(Player2TotalScore >= 100)
 						{
 							cout << "Player 2 Wins!";
@@ -224,6 +227,7 @@ int VSMode()
 
 						Player1TotalScore = Player1Turn(Player1TotalScore); //add the score from a new turn to the running total
 						cout << "\tPlayer 1's total score so far is " << Player1TotalScore << ".\n";
+						cout << "\tPlayer 2's total score so far is " << Player2TotalScore << ".\n";
 						if(Player1TotalScore >= 100)
 						{
 							cout << "Player 1 Wins!";
@@ -243,7 +247,7 @@ return 0;
 }
 
 
-void showMainMenu()
+void showMainMenu() // Function to show the Main Menu
 {
 	cout << "\n**********************************************************************\n"
 		"\tWelcome to the Game of Pig! \n"
@@ -256,7 +260,7 @@ void showMainMenu()
 
 
 
-int SinglePlayerMode()
+int SinglePlayerMode() // Single Player VS Computer Mode
 {
 	int Player, Computer;
 	srand(time(NULL));
@@ -286,6 +290,7 @@ int SinglePlayerMode()
 					{
 						PlayerTotalScore = PlayerTurn(PlayerTotalScore); //add the score from a new turn to the running total
 						cout << "\tYour total score so far is " << PlayerTotalScore << ".\n";
+						cout << "\tComputer total score so far is " << ComputerTotalScore << ".\n";
 						if(PlayerTotalScore >= 100)
 						{
 							cout << "You Win!";
@@ -294,6 +299,7 @@ int SinglePlayerMode()
 
 						ComputerTotalScore = ComputerTurn(ComputerTotalScore); //add the score from a new turn to the running total
 						cout << "\tComputer total score so far is " << ComputerTotalScore << ".\n";
+						cout << "\tYour total score so far is " << PlayerTotalScore << ".\n";
 						if(ComputerTotalScore >= 100)
 						{
 							cout << "Computer Wins!";
@@ -311,6 +317,7 @@ int SinglePlayerMode()
 					{
 						ComputerTotalScore = ComputerTurn(ComputerTotalScore); //add the score from a new turn to the running total
 						cout << "\tComputer total score so far is " << ComputerTotalScore << ".\n";
+						cout << "\tYour total score so far is " << PlayerTotalScore << ".\n";
 						if(ComputerTotalScore >= 100)
 						{
 							cout << "Computer Wins!";
@@ -319,6 +326,7 @@ int SinglePlayerMode()
 
 						PlayerTotalScore = PlayerTurn(PlayerTotalScore); //add the score from a new turn to the running total
 						cout << "\tYour total score so far is " << PlayerTotalScore << ".\n";
+						cout << "\tComputer total score so far is " << ComputerTotalScore << ".\n";
 						if(PlayerTotalScore >= 100)
 						{
 							cout << "You Win!";
@@ -338,7 +346,7 @@ return 0;
 }
 
 
-int main()
+int main() // Shows the main menu and allows player to choose Mode
 {
     showMainMenu();
 
